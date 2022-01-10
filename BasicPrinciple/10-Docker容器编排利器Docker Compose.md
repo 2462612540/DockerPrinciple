@@ -37,14 +37,14 @@ sudo curl -L https://get.daocloud.io/docker/compose/releases/download/1.26.2/doc
 
 安装完成以后，查看指定目录，发现该文件没有可执行权限，进行授权操作。
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200901112824972.png)
+![](../BasicPrinciple/images/1001.png)
 
 ```shell
 # 将可执行权限应用于该二进制文件
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200901113655491.png)
+![](../BasicPrinciple/images/1002.png)
 
 ### 测试
 
@@ -52,7 +52,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 ```
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200901115641336.png)
+![](../BasicPrinciple/images/1003.png)
 
 ### 卸载
 
@@ -125,11 +125,11 @@ docker-compose up
 docker-compose up -d
 ```
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200904182158307.png)
+![](../BasicPrinciple/images/1004.png)
 
 浏览器访问：http://192.168.10.10/ 结果如下：
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200904182520177.png)
+![](../BasicPrinciple/images/1005.png)
 
 使用 `docker-compose down` 可以停止并删除容器、网络。
 
