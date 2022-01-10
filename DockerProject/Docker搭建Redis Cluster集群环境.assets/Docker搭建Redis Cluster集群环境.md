@@ -6,7 +6,7 @@
 
 　　`host` 网络模式需要在创建容器时通过参数 `--net host` 或者 `--network host` 指定，`host` 网络模式可以让**容器共享宿主机网络栈**，容器将不会虚拟出自己的网卡，配置自己的 IP 等，而是使用宿主机的 IP 和端口。
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200909123114605.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200909123114605.png)
 
 　　
 
@@ -26,7 +26,7 @@
 - `CentOS 7.8.2003`
 - `Docker version 19.03.12  `
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200903151202394.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200903151202394.png)
 
 　　
 
@@ -147,11 +147,11 @@ done
 
 　　在 `192.168.10.10` 机器执行查看命令结果如下，如果没有 `tree` 命令先安装 `yum install -y tree`。
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200909154742348.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200909154742348.png)
 
 　　在 `192.168.10.11` 机器执行查看命令结果如下。
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200909154838961.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200909154838961.png)
 
 　　
 
@@ -281,11 +281,11 @@ done
 
 　　在 `192.168.10.10` 机器执行 `docker ps -n 3` 查看容器是否创建成功。
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200909155456853.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200909155456853.png)
 
 　　在 `192.168.10.11` 机器执行 `docker ps -n 3` 查看容器是否创建成功。
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200909155515835.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200909155515835.png)
 
 　　
 
@@ -316,11 +316,11 @@ redis-cli -a 1234 --cluster create 192.168.10.10:6371 192.168.10.10:6372 192.168
 
 　　出现选择提示信息，输入 **yes**，结果如下所示：
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200909160215260.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200909160215260.png)
 
 　　集群创建成功如下：
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200909160445644.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200909160445644.png)
 
 　　
 
@@ -384,7 +384,7 @@ M: ac805b90b6e20e26dc4268454bb2855beea6cc19 192.168.10.10:6372
 
 　　至此一个高可用的 Redis Cluster 集群搭建完成，如下图所示，该集群中包含 6 个 Redis 节点，3 主 3 从。三个主节点会分配槽，处理客户端的命令请求，而从节点可用在主节点故障后，顶替主节点。
 
-![](12-Docker搭建Redis Cluster集群环境.assets/20041523528353133303113714.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/20041523528353133303113714.png)
 
 　　
 
@@ -413,7 +413,7 @@ redis-cli -a 1234 --cluster check 192.168.10.11:6375
 
 ```
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200909144120928.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200909144120928.png)
 
 　　
 
@@ -431,7 +431,7 @@ cluster nodes
 
 ```
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200909144354723.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200909144354723.png)
 
 　　
 
@@ -455,7 +455,7 @@ get bbb
 
 ```
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200909145054279.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200909145054279.png)
 
 　　别着急，让我来解释一下上图中的操作过程：
 
@@ -471,7 +471,7 @@ get bbb
 
 　　通过以上操作我们得知 `name` 键的存储被分配到了 6374 节点，如果直接连接 6374 节点并获取该值会怎么样？没错，不需要重定向节点，因为数据就在该节点，所以直接读取返回。
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200909145613003.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200909145613003.png)
 
 　　
 
@@ -481,9 +481,9 @@ get bbb
 
 　　最后来一波客户端连接操作，随便哪个节点，看看可否通过外部访问 Redis Cluster 集群。
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200909145719830.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200909145719830.png)
 
-![](12-Docker搭建Redis Cluster集群环境.assets/image-20200909145756223.png)
+![](Docker搭建Redis%20Cluster集群环境.assets/image-20200909145756223.png)
 
 　　至此使用多机环境多个容器搭建 Redis Cluster 集群环境就到这里，其实整体搭建过程不算特别麻烦，因为：
 
@@ -494,7 +494,7 @@ get bbb
 
 　　综上所述，有没有更简单的办法呢？当然有了，不然我在这跟你卖什么关子。
 
-![](12-Docker搭建Redis Cluster集群环境.assets/u=2216581864,1154216816&fm=26&gp=0.jpg)
+![](Docker搭建Redis%20Cluster集群环境.assets/u=2216581864,1154216816&fm=26&gp=0.jpg)
 
 　　Docker Compose 就可以解决这个问题。后面我们先学习一下什么是 Docker Compose，然后使用 Docker Compose 再来搭建一遍 Redis Cluster 集群环境，感受感受这前后的区别。
 

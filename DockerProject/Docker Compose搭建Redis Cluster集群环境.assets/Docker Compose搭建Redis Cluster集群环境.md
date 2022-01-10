@@ -6,7 +6,7 @@
 
 　　关于 Docker 网络模式更多的内容请阅读《Docker 网络模式详解及容器间网络通信》。
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200909123114605.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200909123114605.png)
 
 　　
 
@@ -26,7 +26,7 @@
 - `CentOS 7.8.2003`
 - `Docker version 19.03.12  `
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200903151202394.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200903151202394.png)
 
 　　
 
@@ -148,11 +148,11 @@ done
 
 　　在 `192.168.10.10` 机器执行查看命令结果如下，如果没有 `tree` 命令先安装 `yum install -y tree`。
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200909131602123.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200909131602123.png)
 
 　　在 `192.168.10.11` 机器执行查看命令结果如下。
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200909132230772.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200909132230772.png)
 
 　　
 
@@ -339,9 +339,9 @@ docker-compose up -d
 
 ```
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200909141924605.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200909141924605.png)
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200909141955328.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200909141955328.png)
 
 　　
 
@@ -372,11 +372,11 @@ redis-cli -a 1234 --cluster create 192.168.10.10:6371 192.168.10.10:6372 192.168
 
 　　出现选择提示信息，输入 **yes**，结果如下所示：
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200909143404010.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200909143404010.png)
 
 　　集群创建成功如下：
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200909143620414.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200909143620414.png)
 
 　　
 
@@ -440,7 +440,7 @@ S: e08b8f629e2dfa474a836910634052d83c77d06a 192.168.10.11:6376
 
 　　至此一个高可用的 Redis Cluster 集群搭建完成，如下图所示，该集群中包含 6 个 Redis 节点，3 主 3 从。三个主节点会分配槽，处理客户端的命令请求，而从节点可用在主节点故障后，顶替主节点。
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/20041523528353133303113714.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/20041523528353133303113714.png)
 
 　　
 
@@ -469,7 +469,7 @@ redis-cli -a 1234 --cluster check 192.168.10.11:6375
 
 ```
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200909144120928.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200909144120928.png)
 
 　　
 
@@ -487,7 +487,7 @@ cluster nodes
 
 ```
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200909144354723.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200909144354723.png)
 
 　　
 
@@ -511,7 +511,7 @@ get bbb
 
 ```
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200909145054279.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200909145054279.png)
 
 　　别着急，让我来解释一下上图中的操作过程：
 
@@ -527,7 +527,7 @@ get bbb
 
 　　通过以上操作我们得知 `name` 键的存储被分配到了 6374 节点，如果直接连接 6374 节点并获取该值会怎么样？没错，不需要重定向节点，因为数据就在该节点，所以直接读取返回。
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200909145613003.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200909145613003.png)
 
 　　
 
@@ -537,9 +537,9 @@ get bbb
 
 　　最后来一波客户端连接操作，随便哪个节点，看看可否通过外部访问 Redis Cluster 集群。
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200909145719830.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200909145719830.png)
 
-![](14-Docker Compose搭建Redis Cluster集群环境.assets/image-20200909145756223.png)
+![](Docker%20Compose搭建Redis%20Cluster集群环境.assets/image-20200909145756223.png)
 
 　　至此使用多机环境基于 Docker Compose 搭建 Redis Cluster 就到这里。虽然整体搭建过程感觉比起之前并没有简化太多。但是，如果我们想要停止并删除 Redis Cluster 集群环境，之前的方式就需要一个个去操作，而 Docker Compose 只需要一个 `docker-compose down` 命令的操作即可。Docker Compose 的学习及使用就到这里，下文开始我们学习 Docker Swarm 的相关内容。
 
