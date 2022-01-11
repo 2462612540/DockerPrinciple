@@ -113,7 +113,7 @@ Overlay 网络其实并不是一门新技术，它是指构建在另一个网络
 
 Underlay 网络是专门用来承载用户 IP 流量的基础架构层，它与 Overlay 网络之间的关系有点类似物理机和虚拟机。Underlay 网络和物理机都是真正存在的实体，它们分别对应着真实存在的网络设备和计算设备，而 Overlay 网络和虚拟机都是依托在下层实体的基础之上，使用软件虚拟出来的层级。
 
-![](15-Docker Swarm集群管理利器核心概念扫盲.assets/350c0c464af591b8a01655ca5bf233a4.png)
+![](../BasicPrinciple/images/1107.png)
 
 在 Docker 版本 1.12 以后 **Swarm 模式原生已支持覆盖网络**（Overlay Network），只要是这个覆盖网络内的容器，不管在不在同一个宿主机上都能相互通信，即跨主机通信。不同覆盖网络内的容器之间是相互隔离的（相互 ping 不通）。
 
@@ -142,7 +142,7 @@ docker service create --replicas 1 --name mynginx -p 80:80 nginx
 
 ```
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916174617388.png)
+![](../BasicPrinciple/images/1108.png)
 
 - `docker service create`：创建服务；
 - `--replicas`：指定一个服务有几个实例运行；
@@ -301,11 +301,11 @@ hepx06k5ik5n      mynginx        replicated        1/1             nginx:latest 
 
 可以通过 `docker service ps 服务名称|服务ID` 查看服务运行在哪些节点上。
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916180732731.png)
+![](../BasicPrinciple/images/1109.png)
 
 在对应的任务节点上运行 `docker ps` 可以查看该服务对应容器的相关信息。
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916181108430.png)
+![](../BasicPrinciple/images/1110.png)
 
 　　
 
@@ -317,7 +317,7 @@ hepx06k5ik5n      mynginx        replicated        1/1             nginx:latest 
 
 测试结果：5 台机器均可正常访问到该服务。
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916182117529.png)
+![](../BasicPrinciple/images/1111.png)
 
 　　
 
@@ -348,7 +348,7 @@ verify: Service converged
 
 通过 `docker service ps 服务名称|服务ID` 查看服务运行在哪些节点上。
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916184241258.png)
+![](../BasicPrinciple/images/1112.png)
 
 　　
 
@@ -367,7 +367,7 @@ verify: Service converged
 
 通过 `docker service ps 服务名称|服务ID` 查看服务运行在哪些节点上。
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916184353904.png)
+![](../BasicPrinciple/images/1113.png)
 
 在 Swarm 集群模式下真正意义实现了所谓的**弹性服务**，动态扩缩容一行命令搞定，简单、便捷、强大。
 
@@ -421,7 +421,7 @@ docker service update --image redis:6 redis
 
 ```
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916231330724.png)
+![](../BasicPrinciple/images/1114.png)
 
 　　
 
@@ -432,13 +432,13 @@ docker service update --rollback redis
 
 ```
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916231710227.png)
+![](../BasicPrinciple/images/1115.png)
 
 ## 集群搭建
 
 ### 环境准备
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200903151202394.png)
+![](../BasicPrinciple/images/1116.png)
 
 - 五台安装了 Docker 的 CentOS 机器，版本为：`CentOS 7.8.2003`
 - Docker Engine 1.12+（最低要求 1.12，本文使用 19.03.12）
@@ -491,7 +491,7 @@ To add a worker to this swarm, run the following command:
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916164242024.png)
+![](../BasicPrinciple/images/1117.png)
 
 　　
 
@@ -507,7 +507,7 @@ Manager 节点会生成两个令牌，供其他节点加入集群时使用：一
 
 　　
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/tls.png)
+![](../BasicPrinciple/images/1118.png)
 
 　　
 
@@ -521,17 +521,17 @@ Manager 节点会生成两个令牌，供其他节点加入集群时使用：一
 docker swarm join-token manager
 ```
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916164356976.png)
+![](../BasicPrinciple/images/1119.png)
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916164507009.png)
+![](../BasicPrinciple/images/1120.png)
 
 　　
 
 然后在其他节点上运行 `docker swarm join` 并携带令牌参数加入 Swarm 集群，该节点角色为 Manager。
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916164647239.png)
+![](../BasicPrinciple/images/1121.png)
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916165123101.png)
+![](../BasicPrinciple/images/1122.png)
 
 　　
 
@@ -541,15 +541,15 @@ docker swarm join-token manager
 
 通过创建集群时返回的结果可以得知，要向这个集群添加一个 Worker 节点，运行下图中的命令即可。或者管理节点先运行 `docker swarm join-token worker` 命令查看工作节点的令牌信息。
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916164746665.png)
+![](../BasicPrinciple/images/1123.png)
 
 　　
 
 然后在其他节点上运行 `docker swarm join` 并携带令牌参数加入 Swarm 集群，该节点角色为 Worker。
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916164902177.png)
+![](../BasicPrinciple/images/1124.png)
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916165235304.png)
+![](../BasicPrinciple/images/1125.png)
 
 　　
 
@@ -559,7 +559,7 @@ docker swarm join-token manager
 
 在任意 Manager 节点中运行 `docker info` 可以查看当前集群的信息。
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916170832333.png)
+![](../BasicPrinciple/images/1126.png)
 
 　　
 
@@ -573,7 +573,7 @@ docker swarm join-token manager
 docker node ls
 ```
 
-![](16-Docker Swarm集群环境搭建及弹性服务部署.assets/image-20200916165353823.png)
+![](../BasicPrinciple/images/1127.png)
 
 > `*` 代表当前节点，现在的环境为 3 个管理节点构成 1 主 2 从，以及 2 个工作节点。
 

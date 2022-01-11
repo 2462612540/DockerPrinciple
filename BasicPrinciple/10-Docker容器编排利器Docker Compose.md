@@ -2,11 +2,12 @@
 
 ## Compose 简介
 
-在日常工作中，经常会碰到需要多个容器相互配合来完成某项任务的情况，或者开发一个 Web 应用，除了 Web 服务容器本身，还需要数据库服务容器、缓存容器，甚至还包括负载均衡容器等等。
-
-Docker Compose 恰好满足了这样的需求，它是用于定义和运行多容器 Docker 应用程序的工具。通过 Compose，您可以使用 `YAML` 文件来配置应用程序所需要的服务。然后使用一个命令，就可以通过 `YAML` 配置文件创建并启动所有服务。
-
-Docker Compose 项目是 Docker 官方的开源项目，来源于之前的 Fig 项目，使用 Python 语言编写。负责实现对 Docker 容器集群的快速编排。项目地址为：https://github.com/docker/compose/releases
+在日常工作中，经常会碰到需要多个容器相互配合来完成某项任务的情况，或者开发一个 Web 应用，除了 Web 服务容器本身，
+还需要数据库服务容器、缓存容器，甚至还包括负载均衡容器等等。
+Docker Compose 恰好满足了这样的需求，它是用于定义和运行多容器 Docker 应用程序的工具。
+通过 Compose，您可以使用 `YAML` 文件来配置应用程序所需要的服务。然后使用一个命令，就可以通过 `YAML` 配置文件创建并启动所有服务。
+Docker Compose 项目是 Docker 官方的开源项目，来源于之前的 Fig 项目，使用 Python 语言编写。
+负责实现对 Docker 容器集群的快速编排。项目地址为：https://github.com/docker/compose/releases
 
 Docker Compose 使用的三个步骤为：
 - 使用 `Dockerfile` 文件定义应用程序的环境；
@@ -19,13 +20,16 @@ Docker Compose 使用的三个步骤为：
 
 官方文档：https://docs.docker.com/compose/install/
 
-您可以在 macOS，Windows 和 Linux 上运行 Compose。本文演示基于 Linux 环境的安装。我们可以使用 `curl` 命令从 Github 下载它的二进制文件来使用，运行以下命令下载 Docker Compose 的当前稳定版本。或者从网页下载后上传至服务器指定目录 `/usr/local/bin` 也行。
+您可以在 macOS，Windows 和 Linux 上运行 Compose。本文演示基于 Linux 环境的安装。
+我们可以使用 `curl` 命令从 Github 下载它的二进制文件来使用，运行以下命令下载 Docker Compose 的当前稳定版本。
+或者从网页下载后上传至服务器指定目录 `/usr/local/bin` 也行。
 
 ```shell
 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
 
-因为 Docker Compose 存放在 GitHub，可能不太稳定。你也可以通过执行下面的命令，高速安装 Compose。该加速通道由 `DaoCloud` 提供：http://get.daocloud.io/#install-compose
+因为 Docker Compose 存放在 GitHub，可能不太稳定。你也可以通过执行下面的命令，高速安装 Compose。
+该加速通道由 `DaoCloud` 提供：http://get.daocloud.io/#install-compose
 
 ```shell
 sudo curl -L https://get.daocloud.io/docker/compose/releases/download/1.26.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
@@ -133,11 +137,12 @@ docker-compose up -d
 
 使用 `docker-compose down` 可以停止并删除容器、网络。
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200905151142759.png)　　
+![](../BasicPrinciple/images/1006.png)
 
 ### version
 
-描述 Compose 文件的版本信息，当前最新版本为 `3.8`，对应的 Docker 版本为 `19.03.0+`。关于每个版本的详细信息请参考：https://docs.docker.com/compose/compose-file/compose-versioning/
+描述 Compose 文件的版本信息，当前最新版本为 `3.8`，对应的 Docker 版本为 `19.03.0+`。
+关于每个版本的详细信息请参考：https://docs.docker.com/compose/compose-file/compose-versioning/
 
 以下为 Compose 文件的版本信息所对应的 Docker 版本。
 
@@ -254,7 +259,7 @@ CMD ["/usr/local/tomcat/apache-tomcat-9.0.37/bin/catalina.sh", "run"]
 
 将所需的资源包 `jdk` 和 `tomcat` 上传至 Dockerfile 同一目录。
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200905180313675.png)
+![](../BasicPrinciple/images/1007.png)
 
 创建目录并编写 `docker-compose.yml` 文件。
 
@@ -332,7 +337,7 @@ docker-compose up -d --scale helloworld=3
 
 通过下图可以看到有 3 个容器被创建，容器名称最后的**序号**是从 1 开始累加的，这就是序号的作用。所以如果指定了自定义名称，就不能将服务扩展至多个容器。
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200907100341246.png)
+![](../BasicPrinciple/images/1008.png)
 
 #### depends_on
 
@@ -556,7 +561,7 @@ volumes:
   mysql-data-volume: # 一个具体数据卷的条目名称
 ```
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200907162324553.png)
+![](../BasicPrinciple/images/1009.png)
 
 以下方式的数据卷声明创建卷时会使用自定义的名称。
 
@@ -583,7 +588,7 @@ volumes:
     name: mysql-data-volume # 数据卷名称，默认为"工程名称_数据卷条目名称"
 ```
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200907162419037.png)
+![](../BasicPrinciple/images/1010.png)
 
 ### networks
 
@@ -607,7 +612,7 @@ services:
 #networks:
 ```
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200907170121843.png)
+![](../BasicPrinciple/images/1011.png)
 　　
 以下方式的网络声明创建网络时会使用默认的名称：`"工程名称_网络条目名称"`，网络模式默认为 `bridge`。
 
@@ -630,7 +635,7 @@ networks:
   nginx-net: # 一个具体网络的条目名称
 ```
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200907163228551.png)
+![](../BasicPrinciple/images/1012.png)
 
 以下方式的网络声明创建网络时会使用自定义的名称，还可以通过 `driver` 选择网络模式，默认为 `bridge`。
 
@@ -655,7 +660,7 @@ networks:
     driver: bridge # 网络模式，默认为 bridge
 ```
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200907163402097.png)
+![](../BasicPrinciple/images/1013.png)
 
 ## Compose 常用命令
 
@@ -908,17 +913,17 @@ docker-compose down -v
 
 `docker-compose create` 为服务创建容器，已不推荐使用。推荐使用 `docker-compose up` 来实现该功能。
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200907195127285.png)
+![](../BasicPrinciple/images/1014.png)
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200907192043698.png)
+![](../BasicPrinciple/images/1015.png)
 
 ### scale
 
 `docker-compose scale` 设置指定服务运行的容器个数，已不推荐使用。
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200907195213539.png)
+![](../BasicPrinciple/images/1016.png)
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200907194339859.png)
+![](../BasicPrinciple/images/1017.png)
 
 推荐使用 `--scale service=num` 的参数来设置数量。
 
@@ -938,7 +943,7 @@ docker-compose images
 docker-compose images nginx
 ```
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200907200909079.png)
+![](../BasicPrinciple/images/1018.png)
 
 ### port
 
@@ -960,7 +965,7 @@ docker-compose top
 docker-compose top nginx
 ```
 
-![](13-Docker容器编排利器Docker Compose.assets/image-20200907195549857.png)
+![](../BasicPrinciple/images/1019.png)
 
 # Docker Compose原理总结
 
