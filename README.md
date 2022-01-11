@@ -37,10 +37,11 @@
 - Docker构建的数据的读写分离
 - Docker构建的Grafan监控系统
 - Docker构建Redis Cluster集群环境
-- Docker Compose搭建Redis Cluster集群环境
-- Docker Compose搭建MQ集群环境
-- Docker 构建jenkins集群
-- Docker 构建Zookeeper集群
+- Docker-Compose搭建Redis Cluster集群环境
+- Docker-Compose搭建MQ集群环境
+- Docker构建jenkins集群
+- Docker构建Zookeeper集群
+- Dokcer构建Nginx主备服务
 - K8s集群构建
 
 ## Docker Interview Questions

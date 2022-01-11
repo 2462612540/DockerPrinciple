@@ -4,7 +4,7 @@
 Docker 支持 Mac Windows Linux，本文使用 Linux 环境教大家如何基于 CentOS 安装 Docker 及配置镜像加速。
 官方文档：https://docs.docker.com/
 
-## 系统要求
+### 系统要求
 
 官网提示如果要安装 Docker Engine，您需要一个 CentOS 7 以及以上的稳定版本。
 
@@ -22,6 +22,7 @@ sudo yum remove docker \
                   docker-logrotate \
                   docker-engine
 ```
+
 ## 设置 yum 源
 安装 `yum-utils` 软件包（提供了 `yum-config-manager` 程序）并设置稳定的 yum 源方便下载 Docker Engine。
 ```bash
@@ -30,6 +31,7 @@ sudo yum install -y yum-utils
 # 设置 yum 源为阿里云方便下载 Docker Engine
 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 ```
+
 ## Docker 安装
 安装最新版本的 Docker Engine 和容器。
 ```bash
@@ -58,6 +60,7 @@ sudo docker info
 # 查看 docker 帮助文档
 sudo docker --help
 ```
+
 ## 安装校验
 
 ```bash
@@ -123,7 +126,8 @@ sudo systemctl daemon-reload
 # 重新启动 docker
 sudo systemctl restart docker
 ```
-# docker 案例测试 hello-world
+
+# docker 容器案例测试 hello-world
 
 通过运行 `hello-world` 镜像来验证 `Docker Engine` 是否已正确安装。
 
