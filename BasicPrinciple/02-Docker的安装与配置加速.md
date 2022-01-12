@@ -33,6 +33,7 @@ sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 ```
 
+<<<<<<< HEAD
 ### 使用官方安装脚本自动安装
 
 ```bash
@@ -42,7 +43,6 @@ curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 curl -sSL https://get.daocloud.io/docker | sh
 ```
 
-### Docker 手动安装
 安装最新版本的 Docker Engine 和容器。
 ```bash
 sudo yum -y install docker-ce docker-ce-cli containerd.io
