@@ -1,6 +1,6 @@
 # Docker Compose原理
 
-## Compose 简介
+## docker-compose 简介
 
 在日常工作中，经常会碰到需要多个容器相互配合来完成某项任务的情况，或者开发一个 Web 应用，除了 Web 服务容器本身，
 还需要数据库服务容器、缓存容器，甚至还包括负载均衡容器等等。
@@ -14,7 +14,7 @@ Docker Compose 使用的三个步骤为：
 - 使用 `docker-compose.yml` 文件定义构成应用程序的服务，这样它们可以在隔离环境中一起运行；
 - 最后，执行 `docker-compose up` 命令来创建并启动所有服务。
 
-## Compose 安装
+## docker-compose 安装与卸载
 
 ### 下载
 
@@ -68,8 +68,6 @@ sudo rm /usr/local/bin/docker-compose
 
 ## docker-compose.yml 文件详解
 
-### 概念
-
 官方文档：https://docs.docker.com/compose/compose-file/
 
 Docker Compose 允许用户通过 `docker-compose.yml` 文件（YAML 格式）来定义一组相关联的容器为一个工程`（project）`。一个工程包含多个服务`（service）`，每个服务中定义了创建容器时所需的镜像、参数、依赖等。
@@ -84,7 +82,7 @@ Docker Compose 模板文件我们需要关注的顶级配置有 `version`、`ser
 - `networkds`：定义网络，可以多个，根据 DNS server 让相同网络中的容器可以直接通过容器名称进行通信；
 - `volumes`：数据卷，用于实现目录挂载。
 
-## Compose 常用命令
+## docker-compose 常用命令
 
 官方文档：https://docs.docker.com/compose/reference/overview/ 为了更熟练的使用 Compose，以下常用命令大家多多练习，方可熟能生巧。
 
@@ -390,7 +388,7 @@ docker-compose top nginx
 ![](../BasicPrinciple/images/1019.png)
 
 
-## Docker Compose案例
+## Docker Compose编排案例
 
 在配置文件中，所有的容器通过 `services` 来定义，然后使用 `docker-compose` 脚本来启动，停止和重启容器，非常适合多个容器组合使用进行开发的场景。我们先从一个简单的 Compose 案例学起。
 
@@ -506,7 +504,7 @@ services:
 
 然后通过 `dokcer-compose` 相关命令即可完成容器的创建，停止或删除等一系列操作。
 
-#### image
+### image
 
 指定创建容器时所需的**镜像名称标签**或者**镜像 ID**。如果镜像在本地不存在，会去远程拉取。
 
@@ -516,7 +514,7 @@ services:
     image: hello-world
 ```
 
-#### build
+### build
 
 除了可以基于指定的镜像构建容器，还可以基于 `Dockerfile` 文件构建，在使用 `up` 命令时会执行构建任务。
 
@@ -586,7 +584,7 @@ services:
 
 然后通过 `dokcer-compose` 相关命令即可完成容器的创建，停止或删除等一系列操作。
 
-##### context
+### context
 
 该选项可以是 Dockerfile 文件的绝对/相对路径，也可以是远程 Git 仓库的 URL，当提供的值是相对路径时，相对当前 docker-compose.yml 文件所在目录。
 
@@ -595,7 +593,7 @@ build:
   context: . # 相对当前 docker-compose.yml 文件所在目录，基于名称为 Dockerfile 的文件构建镜像
 ```
 
-##### dockerfile
+### dockerfile
 
 一般情况下，默认都基于文件名叫 Dockerfile 的文件构建镜像，当然也可以是自定义的文件名，使用 `dockerfile` 声明，不过这个选项只能声明文件名，文件所在路径还是要通过 centext 来声明。
 
@@ -605,7 +603,7 @@ build:
   dockerfile: Dockerfile-alternate # 基于名称为 Dockerfile-alternate 的文件构建镜像
 ```
 
-#### container_name
+### container_name
 
 Compose 创建的容器默认生成的名称格式为：`工程名称_服务条目名称_序号`。如果要使用自定义名称，使用 `container_name` 声明。
 
@@ -618,7 +616,7 @@ services:
 
 - 因为 Docker 容器名称必须是唯一的，所以如果指定了自定义名称，就不能将服务扩展至多个容器。这样做可能会导致错误。
 
-##### 关于序号
+### 关于序号
 
 序号是干什么用的呢，看下面这个列子你就懂了，`docker-compose.yml` 文件内容如下：
 
@@ -642,7 +640,7 @@ docker-compose up -d --scale helloworld=3
 
 ![](../BasicPrinciple/images/1008.png)
 
-#### depends_on
+### depends_on
 
 使用 Compose 最大的好处就是敲最少的命令做更多的事情，但一般项目容器启动的顺序是有要求的，如果直接从上到下启动容器，必然会因为容器依赖问题而启动失败。例如在没有启动数据库容器的情况下启动了 Web 应用容器，应用容器会因为找不到数据库而退出。`depends_on` 就是用来解决容器依赖、启动先后问题的配置项。
 
@@ -663,7 +661,7 @@ services:
 
 上述 YAML 文件定义的容器会先启动 db 和 redis 两个服务，最后才启动 web 服务。
 
-#### ports
+### ports
 
 容器对外暴露的端口，格式：`左边宿主机端口:右边容器端口`。
 
@@ -673,7 +671,7 @@ ports:
   - "8080:8080"
 ```
 
-#### expose
+### expose
 
 容器暴露的端口不映射到宿主机，只允许能被连接的服务访问。
 
@@ -683,7 +681,7 @@ expose:
   - "8080"
 ```
 
-#### restart
+### restart
 
 容器重启策略，简单的理解就是 Docker 重启以后容器要不要一起启动：
 
@@ -702,7 +700,7 @@ services:
     restart: always
 ```
 
-#### environment
+### environment
 
 添加环境变量。可以使用数组也可以使用字典。布尔相关的值（true、false、yes、no）都需要用引号括起来，以确保 YML 解析器不会将它们转换为真或假。
 
@@ -722,7 +720,7 @@ environment:
   - SESSION_SECRET
 ```
 
-#### env_file
+### env_file
 
 从文件中获取环境变量，可以指定一个或多个文件，其优先级低于 environment 指定的环境变量。
 
@@ -735,7 +733,7 @@ env_file:
 
 - 注意：env 文件中的每一行需采用 `键=值` 格式。以 `#` 开头的行会被视为注释并被忽略。空行也会被忽略。
 
-#### command
+### command
 
 覆盖容器启动后默认执行的命令。
 
@@ -747,7 +745,8 @@ command: echo "helloworld"
 command: ["echo", "helloworld"]
 ```
 
-#### volumes
+### volumes
+
 数据卷，用于实现目录挂载，支持**指定目录挂载**、**匿名挂载**、**具名挂载**。
 
 - 指定目录挂载的格式为：`左边宿主机目录:右边容器目录`，或者`左边宿主机目录:右边容器目录:读写权限`；
@@ -797,7 +796,7 @@ network_mode: "service:[service name]"
 network_mode: "container:[container name/id]"
 ```
 
-#### networks
+### networks
 
 配置容器连接的网络，引用顶级 networks 下的条目。
 
@@ -815,7 +814,7 @@ networks:
     driver: bridge # 网络模式，默认为 bridge
 ```
 
-##### aliases
+### aliases
 
 网络上此服务的别名。同一网络上的其他容器可以使用服务名或此别名连接到服务容器。同一服务在不同的网络上可以具有不同的别名。
 
