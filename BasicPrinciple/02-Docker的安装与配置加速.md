@@ -4,11 +4,11 @@
 Docker 支持 Mac Windows Linux，本文使用 Linux 环境教大家如何基于 CentOS 安装 Docker 及配置镜像加速。
 官方文档：https://docs.docker.com/
 
-### 系统要求
+###系统要求
 
 官网提示如果要安装 Docker Engine，您需要一个 CentOS 7 以及以上的稳定版本。
 
-## 卸载旧版本
+### 卸载旧版本
 
 较旧的 Docker 版本为 `docker` 或 `docker-engine`。 如果已安装这些程序，请卸载它们以及相关的依赖项。
 Docker 镜像、容器、数据卷和网络数据都保存在 `/var/lib/docker/`。新的 Docker 引擎包现在为 `Docker-ce`。
@@ -23,7 +23,8 @@ sudo yum remove docker \
                   docker-engine
 ```
 
-## 设置 yum 源
+###设置 yum 源
+
 安装 `yum-utils` 软件包（提供了 `yum-config-manager` 程序）并设置稳定的 yum 源方便下载 Docker Engine。
 ```bash
 # 安装 yum-utils
@@ -32,7 +33,16 @@ sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 ```
 
-## Docker 安装
+### 使用官方安装脚本自动安装
+
+```bash
+#安装命令如下
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+# 也可以使用国内 daocloud 一键安装命令：
+curl -sSL https://get.daocloud.io/docker | sh
+```
+
+### Docker 手动安装
 安装最新版本的 Docker Engine 和容器。
 ```bash
 sudo yum -y install docker-ce docker-ce-cli containerd.io
@@ -41,7 +51,7 @@ sudo yum -y install docker-ce docker-ce-cli containerd.io
 
 安装过程中如果提示您接受 GPG 密钥，请验证指纹是否与 060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35 匹配，如果是，请接受。
 
-## Docker 的启动与停止
+### Docker 的启动与停止
 ```bash
 # 启动 docker
 sudo systemctl start docker
@@ -61,7 +71,7 @@ sudo docker info
 sudo docker --help
 ```
 
-## 安装校验
+### 安装校验
 
 ```bash
 [root@localhost ~]# docker -v
@@ -96,7 +106,7 @@ Server: Docker Engine - Community
   GitCommit:        fec3683
 ```
 
-# 配置镜像源加速
+## 配置镜像源加速
 
 Docker 从 Docker Hub 拉取镜像，因为是从国外获取，所以速度较慢，会出现以下情况：
 ```bash
@@ -127,7 +137,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
-# docker 容器案例测试 hello-world
+## docker 容器案例测试 hello-world
 
 通过运行 `hello-world` 镜像来验证 `Docker Engine` 是否已正确安装。
 
