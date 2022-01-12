@@ -213,7 +213,7 @@ docker run -di -v /mydata/docker_centos/data:/usr/local/data --name centos7-01 c
 docker run -di -v /宿主机目录:/容器目录 -v /宿主机目录2:/容器目录2 镜像名
 ```
 
-> 目录挂载操作可能会出现权限不足的提示。这是因为 CentOS7 中的安全模块 SELinux 把权限禁掉了，在 docker run 时通过 `--privileged=true` 给该容器加权限来解决挂载的目录没有权限的问题。
+目录挂载操作可能会出现权限不足的提示。这是因为 CentOS7 中的安全模块 SELinux 把权限禁掉了，在 docker run 时通过 `--privileged=true` 给该容器加权限来解决挂载的目录没有权限的问题。
 
 #### 匿名挂载
 
