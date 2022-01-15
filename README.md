@@ -38,11 +38,11 @@
 - Docker构建的Grafan监控系统
 - Docker构建Redis Cluster集群环境
 - Docker-Compose搭建Redis Cluster集群环境
-- Docker-Compose搭建MQ集群环境
+- Docker-Compose搭建MQ集群
 - Docker构建jenkins集群
 - Docker构建Zookeeper集群
 - Dokcer构建Nginx主备服务
-- K8s集群构建
+- Dokcer构建k8s集群
 
 ## Docker Interview Questions
 
