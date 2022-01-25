@@ -24,13 +24,18 @@
 - 02-Docker的安装与配置加速
 - 03-Docker架构及工作原理
 - 04-Docker最常用的镜像命令和容器命令
-- 05-Docker之常见应用部署
-- 06-Docker镜像构建方式
-- 07-Docker镜像的备份恢复迁移
-- 08-Docker镜像仓库的构建
-- 09-Docker网络模式详解及容器间网络通信
-- 10-Docker容器编排利器Docker Compose
-- 11-DockerSwarm集群管理
+- 05-docker的Namespace原理
+- 06-Docker的cgroups原理
+- 07-Docker之常见应用部署
+- 08-Docker file镜像构建方式
+- 09-Docker volume原理与实现
+- 10-Docker镜像仓库的构建
+- 11-Docker的文件存储驱动原理
+- 12-Docker网络模式详解及容器间网络通信
+- 13-Docker容器编排利器Docker Compose
+- 14-Docker镜像的备份恢复迁移
+- 15-Docker Swarm集群管理
+- 16-Kubernetes的容器编排与管理
 
 ## Docker Project
 - Docker构建的数据库主从备份
