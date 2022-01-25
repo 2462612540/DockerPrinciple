@@ -13,7 +13,7 @@ docker pull tomcat
 创建容器。
 
 ```shell
-docker run -di --name tomcat -p 8080:8080 tomcat
+docker run -di --name tomcat -p 8080:8080  --privileged=true tomcat
 ```
 
 进入容器。
@@ -45,7 +45,7 @@ docker pull nginx
 创建 Nginx 容器。
 
 ```shell
-docker run -di --name nginx -p 80:80 nginx
+docker run -di --name nginx -p 80:80  --privileged=true nginx
 ```
 
 将容器内的配置文件拷贝到指定目录（请先提前创建好目录）。
@@ -73,7 +73,7 @@ docker rm nginx
 创建 Nginx 容器，并将容器中的 `/etc/nginx` 目录和宿主机的 `/mydata/docker_nginx/conf` 目录进行挂载。
 
 ```shell
-docker run -di --name nginx -p 80:80 -v /mydata/docker_nginx/conf:/etc/nginx nginx
+docker run -di --name nginx -p 80:80 -v /mydata/docker_nginx/conf:/etc/nginx --privileged=true nginx
 ```
 
 访问宿主机：http://192.168.10.10:80/ 结果如下：
@@ -91,7 +91,7 @@ docker pull mysql:8.0.21
 创建容器。
 
 ```shell
-docker run -di --name mysql8 -p 3306:3306 -v /mydata/docker_mysql/conf:/etc/mysql/conf.d -v /mydata/docker_mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 mysql:8.0.21
+docker run -di --name mysql8 -p 3306:3306 -v /mydata/docker_mysql/conf:/etc/mysql/conf.d -v /mydata/docker_mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234  --privileged=true mysql:8.0.21
 ```
 
 - `-p`：代表端口映射，格式为 宿主机映射端口:容器运行端口。
@@ -121,7 +121,7 @@ docker pull redis
 创建容器。
 
 ```shell
-docker run -di --name redis -p 6379:6379 redis
+docker run -di --name redis -p 6379:6379 --privileged=true redis
 ```
 
 连接容器中的 Redis 时，只需要连接宿主机的 IP + 指定的映射端口即可。
@@ -139,7 +139,7 @@ docker pull mongo
 创建容器。
 
 ```shell
-docker run -di --name mongo -p 27017:27017 mongo
+docker run -di --name mongo -p 27017:27017 --privileged=true mongo
 ```
 
 连接容器中的 MongoDB 时，只需要连接宿主机的 IP + 指定的映射端口即可。
@@ -157,7 +157,7 @@ docker pull elasticsearch:7.8.1
 创建容器，为了方便演示，修改 ES 启动占用内存大小。
 
 ```shell
-docker run -e ES_JAVA_OPTS="-Xms256m -Xmx512m" -e "discovery.type=single-node" -di --name es -p 9200:9200 -p 9300:9300 -p 5601:5601 -v /mydata/docker_es/plugins:/usr/share/elasticsearch/plugins elasticsearch:7.8.1
+docker run -e ES_JAVA_OPTS="-Xms256m -Xmx512m" -e "discovery.type=single-node" -di --name es -p 9200:9200 -p 9300:9300 -p 5601:5601 -v /mydata/docker_es/plugins:/usr/share/elasticsearch/plugins --privileged=true elasticsearch:7.8.1
 ```
 
 安装中文分词器。
@@ -187,7 +187,7 @@ docker pull mobz/elasticsearch-head:5
 创建容器。
 
 ```shell
-docker run -di --name es-head -p 9100:9100 mobz/elasticsearch-head:5
+docker run -di --name es-head -p 9100:9100 --privileged=true mobz/elasticsearch-head:5
 ```
 
 在浏览器中打开 elasticsearch-head 页面，填入 Elasticsearch 地址。
@@ -230,7 +230,7 @@ docker pull solr
 创建容器。
 
 ```shell
-docker run -di --name=solr -p 8983:8983 solr
+docker run -di --name=solr -p 8983:8983 --privileged=true solr
 ```
 
 访问：http://192.168.10.10:8983/solr/#/ 结果如下：
@@ -248,7 +248,7 @@ docker pull rabbitmq
 创建容器。
 
 ```shell
-docker run -di --name rabbitmq -p 4369:4369 -p 5671:5671 -p 5672:5672 -p 15671:15671 -p 15672:15672 -p 25672:25672 rabbitmq
+docker run -di --name rabbitmq -p 4369:4369 -p 5671:5671 -p 5672:5672 -p 15671:15671 -p 15672:15672 -p 25672:25672 --privileged=true rabbitmq
 ```
 
 进入容器并开启管理功能。
